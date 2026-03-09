@@ -53,14 +53,15 @@ export default async function corrections() {
     // Handle profile and preset switching using unified utility
     const { switch: switchProfileAndPreset, restore } = await handleSwitching(profileValue, targetPreset, originalProfile);
 
-    // --- Part 1: Execute STscript for Injections --- 
+    // --- Part 1: Execute STscript for Injections ---
+    const injectionRole = extension_settings[extensionName]?.injectionRoleCorrections || extension_settings[extensionName]?.injectionEndRole || 'system';
     const instructionInjection = isRaw ? filledPrompt : `[${filledPrompt}]`;
     const depth = extension_settings[extensionName]?.depthPromptCorrections ?? 0;
     const stscriptPart1 = `
         // Inject assistant message to rework and instructions|
         /inject id=msgtorework position=chat ephemeral=true scan=true depth=${depth} role=assistant {{lastMessage}}|
         // Inject instructions using user override prompt|
-        /inject id=instruct position=chat ephemeral=true scan=true depth=${depth} ${instructionInjection}|
+        /inject id=instruct position=chat ephemeral=true scan=true depth=${depth} role=${injectionRole} ${instructionInjection}|
     `;
     
     try {

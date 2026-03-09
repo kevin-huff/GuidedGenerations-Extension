@@ -54,10 +54,10 @@ const guidedImpersonate3rd = async () => {
     // Use user-defined impersonate prompt override
     const promptTemplate = extension_settings[extensionName]?.promptImpersonate3rd ?? '';
     const filledPrompt = promptTemplate.replace('{{input}}', currentInputText);
+    const injectionRole = extension_settings[extensionName]?.injectionRoleImpersonate3rd || extension_settings[extensionName]?.injectionEndRole || 'system';
 
-    // Build STScript without preset switching
-    const stscriptCommand = `/impersonate await=true ${filledPrompt} |`;
-    const fullScript = `// Impersonate guide|\n${stscriptCommand}`;
+    // Inject instruction as ephemeral context with configured role, then impersonate
+    const fullScript = `// Impersonate guide|\n/inject id=instruct position=chat ephemeral=true scan=true depth=0 role=${injectionRole} ${filledPrompt} |\n/impersonate await=true |`;
 
     try {
         const context = getContext();
@@ -74,6 +74,9 @@ const guidedImpersonate3rd = async () => {
             
             debugLog('[Impersonate-3rd] STScript execution complete, about to restore profile...');
             
+            // Clean up ephemeral injection
+            await context.executeSlashCommandsWithOptions('/flushinject instruct');
+
             // After completion, read the new input and store it using the setter
             setLastImpersonateResult(textarea.value);
             debugLog('[Impersonate-3rd] STScript executed, new input stored in shared state.');
@@ -89,9 +92,12 @@ const guidedImpersonate3rd = async () => {
     } catch (error) {
         console.error(`[GuidedGenerations] Error executing Guided Impersonate (3rd) stscript: ${error}`);
         setLastImpersonateResult(''); // Use setter to clear shared state on error
-        
+
+        // Clean up ephemeral injection on error
+        try { await getContext().executeSlashCommandsWithOptions('/flushinject instruct'); } catch (_) {}
+
         debugLog('[Impersonate-3rd] Error occurred, about to restore profile...');
-        
+
         // Restore original profile and preset on error
         await restore();
         

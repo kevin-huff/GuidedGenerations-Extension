@@ -12,7 +12,7 @@ import { runGuideScript } from './runGuide.js';
  * @returns {Promise<string|null>} The generated guide info from the pipe, or null on error.
  */
 const customAutoGuide = async (isAuto = false) => {
-    const injectionRole = extension_settings[extensionName]?.injectionEndRole ?? 'system';
+    const injectionRole = extension_settings[extensionName]?.injectionRoleCustomAuto || extension_settings[extensionName]?.injectionEndRole || 'system';
 
     // Allow override from settings, default to empty
     const customPrompt = extension_settings[extensionName]?.customAutoGuidePrompt ?? '';

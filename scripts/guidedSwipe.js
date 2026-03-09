@@ -182,7 +182,7 @@ const guidedSwipe = async () => {
     }
 
     // Get the LATEST injection role setting HERE
-    const injectionRole = extension_settings[extensionName]?.injectionEndRole ?? 'system'; // Get the role setting
+    const injectionRole = extension_settings[extensionName]?.injectionRoleGuidedSwipe || extension_settings[extensionName]?.injectionEndRole || 'system';
 
     try {
         // Save the input state using the shared function (imported)

@@ -9,7 +9,7 @@ import { runGuideScript } from './runGuide.js';
  * This helps maintain consistency in character behavior based on established rules.
  */
 const rulesGuide = async (isAuto = false) => {
-    const injectionRole = extension_settings[extensionName]?.injectionEndRole ?? 'system';
+    const injectionRole = extension_settings[extensionName]?.injectionRoleRules || extension_settings[extensionName]?.injectionEndRole || 'system';
     // Use user-defined prompt override for Rules Guide
     const promptTemplate = extension_settings[extensionName]?.promptRules ?? `[Create a list of explicit rules that {{char}} has learned and follows from the story and their character description. Only include rules that have been explicitly established in the chat history or character information. Format as a numbered list.] `;
     const genCommandSuffix = promptTemplate;

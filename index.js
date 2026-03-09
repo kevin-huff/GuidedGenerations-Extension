@@ -283,6 +283,19 @@ export const defaultSettings = {
     depthPromptGuidedResponse: 0,
     depthPromptGuidedSwipe: 0,
     depthPromptCustomAuto: 1, // Default depth for Custom Auto Guide
+    // Per-feature injection role overrides (empty = use global injectionEndRole)
+    injectionRoleGuidedResponse: '',
+    injectionRoleGuidedSwipe: '',
+    injectionRoleClothes: '',
+    injectionRoleState: '',
+    injectionRoleThinking: '',
+    injectionRoleSituational: '',
+    injectionRoleRules: '',
+    injectionRoleCustomAuto: '',
+    injectionRoleCorrections: '',
+    injectionRoleImpersonate1st: '',
+    injectionRoleImpersonate2nd: '',
+    injectionRoleImpersonate3rd: '',
     LastPatchNoteVersion: '1.4.3' // Default extension version for patch notes
 };
 
@@ -395,6 +408,21 @@ async function updateSettingsUI() {
         if (injectionRoleSelect && extension_settings[extensionName].injectionEndRole) {
             injectionRoleSelect.value = extension_settings[extensionName].injectionEndRole;
         }
+
+        // Update per-feature injection role dropdowns
+        const injectionRoleKeys = [
+            'injectionRoleGuidedResponse', 'injectionRoleGuidedSwipe',
+            'injectionRoleClothes', 'injectionRoleState', 'injectionRoleThinking',
+            'injectionRoleSituational', 'injectionRoleRules', 'injectionRoleCustomAuto',
+            'injectionRoleCorrections', 'injectionRoleImpersonate1st',
+            'injectionRoleImpersonate2nd', 'injectionRoleImpersonate3rd'
+        ];
+        injectionRoleKeys.forEach(key => {
+            const select = document.getElementById(`gg_${key}`);
+            if (select) {
+                select.value = extension_settings[extensionName]?.[key] ?? '';
+            }
+        });
 
         // Populate profile dropdowns
         try {

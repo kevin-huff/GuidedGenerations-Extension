@@ -13,7 +13,7 @@ import { runGuideScript } from './runGuide.js';
  * @returns {Promise<string|null>} The generated state info from the pipe, or null on error.
  */
 const stateGuide = async (isAuto = false) => {
-    const injectionRole = extension_settings[extensionName]?.injectionEndRole ?? 'system';
+    const injectionRole = extension_settings[extensionName]?.injectionRoleState || extension_settings[extensionName]?.injectionEndRole || 'system';
 
     const genAs = 'as=char';
     const defaultPrompt = `[OOC: Answer me out of Character! Considering the last response, write me a list entailing what state and position of all participating characters, including {{user}}, that are present in the current scene. Don't describe their clothes or how they are dressed. Don't mention People who are no longer relevant to the ongoing scene.] `;

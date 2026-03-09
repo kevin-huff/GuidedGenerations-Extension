@@ -20,7 +20,7 @@ const guidedResponse = async () => {
     const originalInput = textarea.value; // Get current input
 
     // --- Get Setting ---
-    const injectionRole = extension_settings[extensionName]?.injectionEndRole ?? 'system'; // Get the role setting
+    const injectionRole = extension_settings[extensionName]?.injectionRoleGuidedResponse || extension_settings[extensionName]?.injectionEndRole || 'system';
 
     // Save the input state using the shared function
     setPreviousImpersonateInput(originalInput);

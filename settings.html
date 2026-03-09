@@ -171,7 +171,7 @@
                         <option value="user">User</option>
                     </select>
                     <small class="setting_item_description"> <!-- Description -->
-                        Determines the role assigned to the end of injected content (like Describe State/Clothes) before generation. 'System' is often best for guidance, 'Assistant' continues the flow, 'User' can sometimes be useful depending on the model/prompt structure. Default: System.
+                        Default role for all injected content. Individual features can override this via the 'Send as' dropdown in their prompt override section. 'System' is often best for guidance, 'Assistant' continues the flow, 'User' can sometimes be useful depending on the model/prompt structure. Default: System.
                     </small>
                 </div>
                 <hr>
@@ -493,6 +493,13 @@
                             <label for="gg_rawPromptClothes" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptClothes" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptClothes" name="depthPromptClothes" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleClothes" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleClothes" name="injectionRoleClothes" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -504,6 +511,13 @@
                             <label for="gg_rawPromptState" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptState" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptState" name="depthPromptState" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleState" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleState" name="injectionRoleState" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -515,6 +529,13 @@
                             <label for="gg_rawPromptThinking" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptThinking" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptThinking" name="depthPromptThinking" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleThinking" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleThinking" name="injectionRoleThinking" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -526,6 +547,13 @@
                             <label for="gg_rawPromptCustomAuto" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptCustomAuto" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptCustomAuto" name="depthPromptCustomAuto" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleCustomAuto" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleCustomAuto" name="injectionRoleCustomAuto" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -537,6 +565,13 @@
                             <label for="gg_rawPromptSituational" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptSituational" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptSituational" name="depthPromptSituational" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleSituational" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleSituational" name="injectionRoleSituational" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -548,6 +583,13 @@
                             <label for="gg_rawPromptRules" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptRules" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptRules" name="depthPromptRules" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleRules" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleRules" name="injectionRoleRules" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -559,6 +601,13 @@
                             <label for="gg_rawPromptCorrections" style="margin-left:4px;">Raw</label>
                             <label for="gg_depthPromptCorrections" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptCorrections" name="depthPromptCorrections" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleCorrections" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleCorrections" name="injectionRoleCorrections" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting_item">
@@ -573,17 +622,44 @@
                     <div class="setting_item">
                         <label for="gg_promptImpersonate1st" style="margin-left: 8px; min-width:150px; display:block;">Impersonate 1st Person Prompt</label>
                         <textarea id="gg_promptImpersonate1st" name="promptImpersonate1st" class="gg-setting-input text_pole" rows="3" style="width:100%; margin-left:8px; min-width:200px;"></textarea>
-                        <button type="button" class="gg-default-button" data-target="promptImpersonate1st" style="margin-top:4px;">Default</button>
+                        <div style="display: flex; align-items: center; margin-top: 4px;">
+                            <button type="button" class="gg-default-button" data-target="promptImpersonate1st" style="margin-top:4px;">Default</button>
+                            <label for="gg_injectionRoleImpersonate1st" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleImpersonate1st" name="injectionRoleImpersonate1st" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="setting_item">
                         <label for="gg_promptImpersonate2nd" style="margin-left: 8px; min-width:150px; display:block;">Impersonate 2nd Person Prompt</label>
                         <textarea id="gg_promptImpersonate2nd" name="promptImpersonate2nd" class="gg-setting-input text_pole" rows="3" style="width:100%; margin-left:8px; min-width:200px;"></textarea>
-                        <button type="button" class="gg-default-button" data-target="promptImpersonate2nd" style="margin-top:4px;">Default</button>
+                        <div style="display: flex; align-items: center; margin-top: 4px;">
+                            <button type="button" class="gg-default-button" data-target="promptImpersonate2nd" style="margin-top:4px;">Default</button>
+                            <label for="gg_injectionRoleImpersonate2nd" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleImpersonate2nd" name="injectionRoleImpersonate2nd" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="setting_item">
                         <label for="gg_promptImpersonate3rd" style="margin-left: 8px; min-width:150px; display:block;">Impersonate 3rd Person Prompt</label>
                         <textarea id="gg_promptImpersonate3rd" name="promptImpersonate3rd" class="gg-setting-input text_pole" rows="3" style="width:100%; margin-left:8px; min-width:200px;"></textarea>
-                        <button type="button" class="gg-default-button" data-target="promptImpersonate3rd" style="margin-top:4px;">Default</button>
+                        <div style="display: flex; align-items: center; margin-top: 4px;">
+                            <button type="button" class="gg-default-button" data-target="promptImpersonate3rd" style="margin-top:4px;">Default</button>
+                            <label for="gg_injectionRoleImpersonate3rd" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleImpersonate3rd" name="injectionRoleImpersonate3rd" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="setting_item">
                         <label for="gg_promptGuidedContinue" style="margin-left: 8px; min-width:150px; display:block;">Guided Continue Prompt</label>
@@ -593,16 +669,34 @@
                     <div class="setting_item">
                         <label for="gg_promptGuidedResponse" style="margin-left: 8px; min-width:150px; display:block;">Guided Response Prompt</label>
                         <textarea id="gg_promptGuidedResponse" name="promptGuidedResponse" class="gg-setting-input text_pole" rows="3" style="width:100%; margin-left:8px; min-width:200px;"></textarea>
-                        <button type="button" class="gg-default-button" data-target="promptGuidedResponse" style="margin-top:4px;">Default</button>
+                        <div style="display: flex; align-items: center; margin-top: 4px;">
+                            <button type="button" class="gg-default-button" data-target="promptGuidedResponse" style="margin-top:4px;">Default</button>
                             <label for="gg_depthPromptGuidedResponse" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptGuidedResponse" name="depthPromptGuidedResponse" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleGuidedResponse" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleGuidedResponse" name="injectionRoleGuidedResponse" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="setting_item">
                         <label for="gg_promptGuidedSwipe" style="margin-left: 8px; min-width:150px; display:block;">Guided Swipe Prompt</label>
                         <textarea id="gg_promptGuidedSwipe" name="promptGuidedSwipe" class="gg-setting-input text_pole" rows="3" style="width:100%; margin-left:8px; min-width:200px;"></textarea>
-                        <button type="button" class="gg-default-button" data-target="promptGuidedSwipe" style="margin-top:4px;">Default</button>
+                        <div style="display: flex; align-items: center; margin-top: 4px;">
+                            <button type="button" class="gg-default-button" data-target="promptGuidedSwipe" style="margin-top:4px;">Default</button>
                             <label for="gg_depthPromptGuidedSwipe" style="margin-left:8px;">Depth:</label>
                             <input type="number" id="gg_depthPromptGuidedSwipe" name="depthPromptGuidedSwipe" class="gg-setting-input" min="0" style="width: 50px; margin-left:4px;">
+                            <label for="gg_injectionRoleGuidedSwipe" style="margin-left:8px;">Send as:</label>
+                            <select id="gg_injectionRoleGuidedSwipe" name="injectionRoleGuidedSwipe" class="gg-setting-input text_pole select_compact" style="margin-left:4px; width: auto;">
+                                <option value="">Default</option>
+                                <option value="system">System</option>
+                                <option value="assistant">Assistant</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                     </div>
                 </div> <!-- Added closing wrapper tag -->
             </div>
