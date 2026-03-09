@@ -39,16 +39,16 @@ const guidedImpersonate2nd = async () => {
     const presetKey = 'presetImpersonate2nd';
     const profileValue = extension_settings[extensionName]?.[profileKey] ?? '';
     const presetValue = extension_settings[extensionName]?.[presetKey] ?? '';
-    
+
     // Debug: Log the exact values being retrieved
     debugLog(`[Impersonate-2nd] Profile key: "${profileKey}"`);
     debugLog(`[Impersonate-2nd] Preset key: "${presetKey}"`);
     debugLog(`[Impersonate-2nd] Profile value from settings: "${profileValue}"`);
     debugLog(`[Impersonate-2nd] Preset value from settings: "${presetValue}"`);
     debugLog(`[Impersonate-2nd] All profile settings:`, Object.keys(extension_settings[extensionName] || {}).filter(key => key.startsWith('profile')));
-    
+
     debugLog(`[Impersonate-2nd] Using profile: ${profileValue || 'current'}, preset: ${presetValue || 'none'}`);
-    
+
     const { switch: switchProfileAndPreset, restore } = await handleSwitching(profileValue, presetValue, originalProfile);
 
     // Use user-defined impersonate prompt override
@@ -56,34 +56,41 @@ const guidedImpersonate2nd = async () => {
     const filledPrompt = promptTemplate.replace('{{input}}', currentInputText);
     const injectionRole = extension_settings[extensionName]?.injectionRoleImpersonate2nd || extension_settings[extensionName]?.injectionEndRole || 'system';
 
-    // Inject instruction as ephemeral context with configured role, then impersonate
-    const fullScript = `// Impersonate guide|\n/inject id=instruct position=chat ephemeral=true scan=true depth=0 role=${injectionRole} ${filledPrompt} |\n/impersonate await=true |`;
+    // Inject instruction with configured role, then generate via /gen (not /impersonate, which forces system role)
+    const fullScript = `// Impersonate guide|\n/inject id=instruct position=chat ephemeral=true scan=true depth=0 role=${injectionRole} ${filledPrompt} |\n/gen await=true |`;
 
     try {
         const context = getContext();
         if (typeof context.executeSlashCommandsWithOptions === 'function') {
             debugLog('[Impersonate-2nd] About to switch profile and preset...');
-            
+
             // Switch profile and preset before executing
             await switchProfileAndPreset();
-            
+
             debugLog('[Impersonate-2nd] Profile and preset switch complete, about to execute STScript...');
-            
-            // Execute the command and wait for it to complete
-            await context.executeSlashCommandsWithOptions(fullScript); 
-            
+
+            // Execute the command and capture the pipe result
+            const result = await context.executeSlashCommandsWithOptions(fullScript, { showOutput: false });
+            const generatedText = result?.pipe || '';
+
             debugLog('[Impersonate-2nd] STScript execution complete, about to restore profile...');
-            
+
             // Clean up ephemeral injection
             await context.executeSlashCommandsWithOptions('/flushinject instruct');
 
-            // After completion, read the new input and store it using the setter
+            // Place generated text in textarea (since we use /gen instead of /impersonate)
+            if (generatedText) {
+                textarea.value = generatedText;
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+
+            // After completion, store the new input using the setter
             setLastImpersonateResult(textarea.value);
             debugLog('[Impersonate-2nd] STScript executed, new input stored in shared state.');
 
             // After completion, restore original profile and preset using utility restore function
             await restore();
-            
+
             debugLog('[Impersonate-2nd] Profile restore complete');
 
         } else {
@@ -100,7 +107,7 @@ const guidedImpersonate2nd = async () => {
 
         // Restore original profile and preset on error
         await restore();
-        
+
         debugLog('[Impersonate-2nd] Profile restore complete after error');
     }
 };
